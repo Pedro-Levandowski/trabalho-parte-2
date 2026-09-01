@@ -1,6 +1,10 @@
-# trabalho-parte-2
+# Cálculo Numérico: Sistema em Ponto Flutuante (Trabalho Parte 2)
 
 Aplicação em Java que recebe uma expressão matemática em notação infixa, converte para Notação Polonesa Reversa (RPN) e calcula o resultado utilizando uma pilha.
+
+## Alunos
+- Fernando Ferreira Costa Junior
+- Pedro Alpino Levandowski
 
 ## Como funciona
 
