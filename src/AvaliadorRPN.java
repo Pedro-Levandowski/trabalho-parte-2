@@ -8,12 +8,21 @@ public class AvaliadorRPN {
 
         for (String token : tokens) {
             if (ehOperador(token)) {
+                if (pilha.size() < 2) {
+                    throw new IllegalArgumentException(
+                            "Expressao invalida: operandos insuficientes para o operador '" + token + "'.");
+                }
+
                 double b = pilha.pop();
                 double a = pilha.pop();
                 pilha.push(aplicarOperador(a, b, token));
             } else {
                 pilha.push(Double.parseDouble(token));
             }
+        }
+
+        if (pilha.size() != 1) {
+            throw new IllegalArgumentException("Expressao invalida: valores restantes na pilha ao final da avaliacao.");
         }
 
         return pilha.pop();
@@ -28,6 +37,9 @@ public class AvaliadorRPN {
             case "*":
                 return a * b;
             case "/":
+                if (b == 0) {
+                    throw new ArithmeticException("Divisao por zero.");
+                }
                 return a / b;
             default:
                 throw new IllegalArgumentException("Operador desconhecido: " + operador);
