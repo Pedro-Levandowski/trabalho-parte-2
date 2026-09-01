@@ -10,7 +10,7 @@ public class AvaliadorRPN {
             if (ehOperador(token)) {
                 double b = pilha.pop();
                 double a = pilha.pop();
-                pilha.push(operar(a, b, token));
+                pilha.push(aplicarOperador(a, b, token));
             } else {
                 pilha.push(Double.parseDouble(token));
             }
@@ -19,17 +19,19 @@ public class AvaliadorRPN {
         return pilha.pop();
     }
 
-    private static double operar(double a, double b, String operador) {
-        if (operador.equals("+")) {
-            return a + b;
+    private static double aplicarOperador(double a, double b, String operador) {
+        switch (operador) {
+            case "+":
+                return a + b;
+            case "-":
+                return a - b;
+            case "*":
+                return a * b;
+            case "/":
+                return a / b;
+            default:
+                throw new IllegalArgumentException("Operador desconhecido: " + operador);
         }
-        if (operador.equals("-")) {
-            return a - b;
-        }
-        if (operador.equals("*")) {
-            return a * b;
-        }
-        return a / b;
     }
 
     private static boolean ehOperador(String token) {
