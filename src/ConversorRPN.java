@@ -33,10 +33,11 @@ public class ConversorRPN {
                         saida.add(String.valueOf(operadores.pop()));
                     }
 
-                    if (!operadores.isEmpty()
-                            && operadores.peek() == '(') {
-                        operadores.pop();
+                    if (operadores.isEmpty()) {
+                        throw new IllegalArgumentException("Parênteses desbalanceados.");
                     }
+
+                    operadores.pop();
                 } else if (ehOperador(caractere)) {
                     while (!operadores.isEmpty()
                             && operadores.peek() != '('
@@ -55,7 +56,13 @@ public class ConversorRPN {
         }
 
         while (!operadores.isEmpty()) {
-            saida.add(String.valueOf(operadores.pop()));
+            char operador = operadores.pop();
+
+            if (operador == '(') {
+                throw new IllegalArgumentException("Parênteses desbalanceados.");
+            }
+
+            saida.add(String.valueOf(operador));
         }
 
         return String.join(" ", saida);
